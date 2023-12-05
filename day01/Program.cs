@@ -5,25 +5,16 @@ Console.WriteLine(Environment.GetEnvironmentVariable("part") is "part1" ? Part1(
 
 int Part1(List<string> lines)
 {
-    var sum = 0;
-    foreach (var line in lines)
+    return lines.Select(line =>
     {
         var values = new Regex(@"\d").Matches(line).Select(x => x.Value);
-        sum += int.Parse($"{values.First()}{values.Last()}");
-    }
-
-    return sum;
+        return int.Parse($"{values.First()}{values.Last()}");
+    }).Sum(); // 54630 :) 
 }
 
 int Part2(List<string> lines)
 {
-    var sum = 0;
-    foreach (var line in lines)
-    {
-        sum += FindEdgeNumber(line);
-    }
-
-    return sum;
+    return lines.Select(FindEdgeNumber).Sum(); // 54770 :)
 }
 
 int FindEdgeNumber(string line)
